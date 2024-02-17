@@ -8,8 +8,6 @@ import "jspdf-autotable";
 import OrderDetailsPage from "./orderDetails/OrderDetails";
 
 
-
-
 const OrderTable = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
