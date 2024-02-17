@@ -11,7 +11,7 @@ const Header = () => {
                                 <path d="M96 0V47L48 94H0V47L48 0H96Z" />
                             </svg>
 
-                            StockWalla
+                            Portfolio Management
                         </a>
 
                         <nav class="hidden gap-12 lg:flex">
