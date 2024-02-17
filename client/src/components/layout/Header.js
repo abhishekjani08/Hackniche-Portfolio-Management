@@ -292,17 +292,17 @@ function Header({
               </a>
             </Dropdown>
           </Badge>
-          <Button type="link" onClick={showDrawer}>
+          {/* <Button type="link" onClick={showDrawer}>
             {logsetting}
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             type="link"
             className="sidebar-toggler"
             onClick={() => onPress()}
           >
             {toggler}
-          </Button>
-          <Drawer
+          </Button> */}
+          {/* <Drawer
             className="settings-drawer"
             mask={true}
             width={360}
@@ -408,8 +408,8 @@ function Header({
                 </div>
               </div>
             </div>
-          </Drawer>
-          <Link to="/login" className="btn-sign-in">
+          </Drawer> */}
+          <Link to="/sign-in" className="btn-sign-in">
             {profile}
             <span>Sign in</span>
           </Link>
