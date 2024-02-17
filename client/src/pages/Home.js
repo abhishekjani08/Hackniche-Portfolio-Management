@@ -130,29 +130,29 @@ function Home() {
   ];
   const count = [
     {
-      today: "Today’s Stocks",
-      title: "$53,000",
+      today: "Current Stocks",
+      title: "50",
       persent: "+30%",
       icon: dollor,
       bnb: "bnb2",
     },
     {
-      today: "Today’s Users",
+      today: "Total Investment",
       title: "3,200",
       persent: "+20%",
       icon: profile,
       bnb: "bnb2",
     },
     {
-      today: "New Clients",
+      today: "Total Returns",
       title: "+1,200",
       persent: "-20%",
       icon: heart,
       bnb: "redtext",
     },
     {
-      today: "New Orders",
-      title: "$13,200",
+      today: "New Stocks",
+      title: "200",
       persent: "10%",
       icon: cart,
       bnb: "bnb2",
