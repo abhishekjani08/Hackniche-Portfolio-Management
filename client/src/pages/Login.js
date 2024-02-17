@@ -24,10 +24,10 @@ const Login = () => {
       }
       else {
         console.log(data);
-        alert("User Signin successfulssss");
-        console.log(data);
+        // alert("User Signin successful");
+        // console.log(data);
 
-        alert("User Logged in Successfulsss");
+        alert("User Logged in Successful");
         history.push("/dashboard");
       }
 

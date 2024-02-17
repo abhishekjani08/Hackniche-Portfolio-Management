@@ -98,7 +98,7 @@ const MostSearched = () => {
   };
 
   return (
-    <div>cc    
+    <div>
       <h1>Stock List</h1>
       <Button type="text" onClick={handleLowToHighFilter}>
         Low to High

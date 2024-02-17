@@ -3621,6 +3621,15 @@ chart.js@^4.4.1:
   dependencies:
     "@kurkle/color" "^0.3.0"
 
+chart@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/chart/-/chart-0.1.2.tgz"
+  integrity sha512-MSiVzAd3qUEXv54k9KGe1oIoC7WG32W9wtjpovlTGlzo2ue/fRiHf7kJAK1zmD736jH/0fVWNCQLh41btfAEZQ==
+  dependencies:
+    hashish ""
+    hat ""
+    mrcolor "https://github.com/rook2pawn/mrcolor/archive/master.tar.gz"
+
 check-types@^11.1.1:
   version "11.1.2"
   resolved "https://registry.npmjs.org/check-types/-/check-types-11.1.2.tgz"
@@ -3727,6 +3736,11 @@ color-convert@^2.0.1:
   integrity sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
   dependencies:
     color-name "~1.1.4"
+
+color-convert@0.2.x:
+  version "0.2.1"
+  resolved "https://registry.npmjs.org/color-convert/-/color-convert-0.2.1.tgz"
+  integrity sha512-FWbwpCgyRV41Vml0iKU9UmL0dVTKORnm7ZC8h8cdfvutk2bU7ZcMLtSleggScK/IpUVXILg9Pw86LhPUQyTaVg==
 
 color-name@~1.1.4:
   version "1.1.4"
@@ -5710,12 +5724,24 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
+hashish@:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/hashish/-/hashish-0.0.4.tgz"
+  integrity sha512-xyD4XgslstNAs72ENaoFvgMwtv8xhiDtC2AtzCG+8yF7W/Knxxm9BX+e2s25mm+HxMKh0rBmXVOEGF3zNImXvA==
+  dependencies:
+    traverse ">=0.2.4"
+
 hasown@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/hasown/-/hasown-2.0.0.tgz"
   integrity sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==
   dependencies:
     function-bind "^1.1.2"
+
+hat@:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/hat/-/hat-0.0.3.tgz"
+  integrity sha512-zpImx2GoKXy42fVDSEad2BPKuSQdLcqsCYa48K3zHSzM/ugWuYjLDr8IXxpVuL7uCLHw56eaiLxCRthhOzf5ug==
 
 he@^1.2.0:
   version "1.2.0"
@@ -7390,10 +7416,12 @@ moment@^2.24.0, moment@^2.25.3, moment@^2.30.1:
   resolved "https://registry.npmjs.org/moment/-/moment-2.30.1.tgz"
   integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
 
-ms@^2.1.1, ms@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
-  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+"mrcolor@https://github.com/rook2pawn/mrcolor/archive/master.tar.gz":
+  version "0.0.1"
+  resolved "https://github.com/rook2pawn/mrcolor/archive/master.tar.gz"
+  integrity sha512-feteSepg0FRp0fW3RafigAjU7gXiiaa4OlMW39FEmcvQPbD7Zlpc2PSu4hVBPSBR4XNee8n6EjCTfK0O37DL5A==
+  dependencies:
+    color-convert "0.2.x"
 
 ms@^2.1.1, ms@2.1.2:
   version "2.1.2"
@@ -10502,6 +10530,11 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+traverse@>=0.2.4:
+  version "0.6.8"
+  resolved "https://registry.npmjs.org/traverse/-/traverse-0.6.8.tgz"
+  integrity sha512-aXJDbk6SnumuaZSANd21XAo15ucCDE38H4fkqiGsc3MhCK+wOlZvLP9cB/TvpHT0mOyWgC4Z8EwRlzqYSUzdsA==
 
 tryer@^1.0.1:
   version "1.0.1"
