@@ -295,14 +295,14 @@ function Header({
           {/* <Button type="link" onClick={showDrawer}>
             {logsetting}
           </Button> */}
-          {/* <Button
+          <Button
             type="link"
             className="sidebar-toggler"
             onClick={() => onPress()}
           >
             {toggler}
-          </Button> */}
-          {/* <Drawer
+          </Button>
+          <Drawer
             className="settings-drawer"
             mask={true}
             width={360}
@@ -408,9 +408,8 @@ function Header({
                 </div>
               </div>
             </div>
-          </Drawer>  */}
-         
-           <Link to="/login" className="btn-sign-in mx-auto items-center ">
+          </Drawer>
+          <Link to="/login" className="btn-sign-in mx-auto items-center ">
             {profile}
             <p className="mx-auto text-center ml-auto">Logout</p>
             {/* <span>Sign in</span> */}
