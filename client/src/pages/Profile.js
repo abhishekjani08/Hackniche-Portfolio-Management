@@ -162,9 +162,9 @@ function Profile() {
               <Avatar.Group>
                 <Avatar size={74} shape="square" src={profilavatar} />
 
-                <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Sarah Jacob</h4>
-                  <p>CEO / Co-Founder</p>
+                <div className="avatar-info"> 
+                  <h4 className="font-semibold m-0">Username</h4>
+                  <p>Stock Walla</p>
                 </div>
               </Avatar.Group>
             </Col>
@@ -179,8 +179,8 @@ function Profile() {
             >
               <Radio.Group defaultValue="a">
                 <Radio.Button value="a">OVERVIEW</Radio.Button>
-                <Radio.Button value="b">TEAMS</Radio.Button>
-                <Radio.Button value="c">PROJECTS</Radio.Button>
+                <Radio.Button value="b">Tab 2</Radio.Button>
+                <Radio.Button value="c">Tab 3</Radio.Button>
               </Radio.Group>
             </Col>
           </Row>
@@ -192,7 +192,7 @@ function Profile() {
           <Card
             bordered={false}
             className="header-solid h-full"
-            title={<h6 className="font-semibold m-0">Platform Settings</h6>}
+            title={<h6 className="font-semibold m-0">Settings</h6>}
           >
             <ul className="list settings-list">
               <li>
@@ -203,27 +203,19 @@ function Profile() {
 
                 <span>Email me when someone follows me</span>
               </li>
-              <li>
-                <Switch />
-                <span>Email me when someone answers me</span>
-              </li>
-              <li>
-                <Switch defaultChecked />
-                <span>Email me when someone mentions me</span>
-              </li>
+                {/* <li>
+                  <Switch />
+                  <span>Email me when someone answers me</span>
+                </li>
+                <li>
+                  <Switch defaultChecked />
+                  <span>Email me when someone mentions me</span>
+                </li> */}
               <li>
                 <h6 className="list-header text-sm text-muted m-0">
                   APPLICATION
                 </h6>
-              </li>
-              <li>
-                <Switch defaultChecked />
-                <span>New launches and projects</span>
-              </li>
-              <li>
-                <Switch defaultChecked />
-                <span>Monthly product updates</span>
-              </li>
+              </li> 
               <li>
                 <Switch defaultChecked />
                 <span>Subscribe to newsletter</span>
@@ -242,9 +234,7 @@ function Profile() {
             <p className="text-dark">
               {" "}
               Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer
-              is no. If two equally difficult paths, choose the one more painful
-              in the short term (pain avoidance is creating an illusion of
-              equality).{" "}
+              is no..{" "}
             </p>
             <hr className="my-25" />
             <Descriptions title="Oliver Liam">
@@ -311,7 +301,7 @@ function Profile() {
           </>
         }
       >
-        <Row gutter={[24, 24]}>
+        {/* <Row gutter={[24, 24]}>
           {project.map((p, index) => (
             <Col span={24} md={12} xl={6} key={index}>
               <Card
@@ -355,7 +345,7 @@ function Profile() {
               )}
             </Upload>
           </Col>
-        </Row>
+        </Row> */}
       </Card>
     </>
   );
