@@ -28,7 +28,7 @@ import Login from "./pages/Login";
 function App() {
   return (
     <div className="App">
-      <Switch> 
+      <Switch>
         <Route exact path component={Landing} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={SignIn} />
