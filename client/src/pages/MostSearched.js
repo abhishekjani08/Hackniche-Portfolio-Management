@@ -3,7 +3,7 @@ import { Table, Input, Button, Space } from "antd";
 import axios from "axios";
 import Chart from "chart.js/auto";
 import _ from "lodash"; // Import lodash
-
+import "./MostSearched.css";
 import { SearchOutlined } from "@ant-design/icons";
 
 const MostSearched = () => {
