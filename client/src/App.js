@@ -22,13 +22,16 @@ import StockGraph from "./pages/StockGraph";
 import NewsFeed from "./pages/NewsFeed";
 import RiskParameters from "./pages/RiskParameters";
 import PortfolioRebalancing from "./pages/PortfolioRebalancing";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/sign-up" exact component={SignUp} />
-        <Route path="/sign-in" exact component={SignIn} />
+        <Route exact path component={Landing} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={SignIn} />
         <Main>
           <Route exact path="/dashboard" component={Home} />
           <Route exact path="/historicaldata" component={HistoricalData} />
