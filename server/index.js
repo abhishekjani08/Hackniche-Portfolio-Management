@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const routes = require("./Routes/index.routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const axios = require("axios");
+// const axios = require("axios");
 
 
 const app = express();
