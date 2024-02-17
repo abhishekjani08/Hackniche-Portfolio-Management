@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { Layout, Card, Form, Input, Button, Typography, message } from "antd";
+import { Layout, Card, Form, Input, Button, message } from "antd";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
-
-
 
 const { Content } = Layout;
 
