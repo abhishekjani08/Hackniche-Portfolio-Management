@@ -30,6 +30,29 @@ function Sidenav({ color }) {
     </svg>,
   ];
 
+  const svg = [
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      key={0}
+    >
+      <path
+        d="M3 4C3 3.44772 3.44772 3 4 3H16C16.5523 3 17 3.44772 17 4V6C17 6.55228 16.5523 7 16 7H4C3.44772 7 3 6.55228 3 6V4Z"
+        fill={color}
+      ></path>
+      <path
+        d="M3 10C3 9.44771 3.44772 9 4 9H10C10.5523 9 11 9.44771 11 10V16C11 16.5523 10.5523 17 10 17H4C3.44772 17 3 16.5523 3 16V10Z"
+        fill={color}
+      ></path>
+      <path
+        d="M14 9C13.4477 9 13 9.44771 13 10V16C13 16.5523 13.4477 17 14 17H16C16.5523 17 17 16.5523 17 16V10C17 9.44771 16.5523 9 16 9H14Z"
+        fill={color}
+      ></path>
+    </svg>,
+  ];
+
   const tables = [
     <svg
       width="20"
@@ -169,17 +192,92 @@ function Sidenav({ color }) {
             <span className="label">Dashboard</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item key="12">
+          <NavLink to="/historicaldata">
+            <span
+              className="icon"
+              style={{
+                background: page === "historicaldata" ? color : "",
+              }}
+            > 
+              {/* Svg Below */}
+              {svg} 
+            </span>
+            <span className="label">Historical Data</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="13">
+          <NavLink to="/stockgraph">
+            <span
+              className="icon"
+              style={{
+                background: page === "stockgraph" ? color : "",
+              }}
+            > 
+              {/* Svg Below */}
+              {svg} 
+            </span>
+            <span className="label">Stock Graph</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="14">
+          <NavLink to="/newsfeed">
+            <span
+              className="icon"
+              style={{
+                background: page === "newsfeed" ? color : "",
+              }}
+            > 
+              {/* Svg Below */}
+              {svg} 
+            </span>
+            <span className="label">News Feed</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="15">
+          <NavLink to="/riskparameters">
+            <span
+              className="icon"
+              style={{
+                background: page === "riskparameters" ? color : "",
+              }}
+            > 
+              {/* Svg Below */}
+              {svg} 
+            </span>
+            <span className="label">Risk Parameters</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="16">
+          <NavLink to="/portfoliorebalancing">
+            <span
+              className="icon"
+              style={{
+                background: page === "portfoliorebalancing" ? color : "",
+              }}
+            > 
+              {/* Svg Below */}
+              {svg} 
+            </span>
+            <span className="label">Rebalancing</span>
+          </NavLink>
+        </Menu.Item>
+
+        {/* <Menu.Item key="2">
           <NavLink to="/tables">
             <span
               className="icon"
               style={{
-                background: page === "users" ? color : "",
+                background: page === "tables" ? color : "",
               }}
             >
               {tables}
             </span>
-            <span className="label">Users</span>
+            <span className="label">Tables</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="3">
@@ -220,7 +318,7 @@ function Sidenav({ color }) {
             </span>
             <span className="label">Categories</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
         {/* <Menu.Item key="6">
           <NavLink to="/Subcategories">
             <span
@@ -272,7 +370,7 @@ function Sidenav({ color }) {
             </span>
             <span className="label">RTL</span>
           </NavLink> */}
-          <Menu.Item key="9">
+          {/* <Menu.Item key="9">
             <NavLink to="/payment">
               <span
                 className="icon"
@@ -284,7 +382,7 @@ function Sidenav({ color }) {
               </span>
               <span className="label">Payments</span>
             </NavLink>
-          </Menu.Item>
+          </Menu.Item> */}
         {/* </Menu.Item> */}
         <Menu.Item className="menu-item-header" key="5">
           Account Pages

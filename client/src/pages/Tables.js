@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Tables = () => {
   const [searchText, setSearchText] = useState("");
-  console.log(searchText);
+  // console.log(searchText);
   const [searchedColumn, setSearchedColumn] = useState("");
   const [data, setData] = useState([]);
   useEffect(() => {
