@@ -199,9 +199,9 @@ function Sidenav({ color }) {
               style={{
                 background: page === "mostsearched" ? color : "",
               }}
-            > 
+            >
               {/* Svg Below */}
-              {svg} 
+              {svg}
             </span>
             <span className="label">Most Searched Data</span>
           </NavLink>
@@ -214,9 +214,9 @@ function Sidenav({ color }) {
               style={{
                 background: page === "stockgraph" ? color : "",
               }}
-            > 
+            >
               {/* Svg Below */}
-              {svg} 
+              {svg}
             </span>
             <span className="label">Stock Graph</span>
           </NavLink>
@@ -229,9 +229,9 @@ function Sidenav({ color }) {
               style={{
                 background: page === "newsfeed" ? color : "",
               }}
-            > 
+            >
               {/* Svg Below */}
-              {svg} 
+              {svg}
             </span>
             <span className="label">News Feed</span>
           </NavLink>
@@ -244,9 +244,9 @@ function Sidenav({ color }) {
               style={{
                 background: page === "riskparameters" ? color : "",
               }}
-            > 
+            >
               {/* Svg Below */}
-              {svg} 
+              {svg}
             </span>
             <span className="label">Risk Parameters</span>
           </NavLink>
@@ -259,9 +259,9 @@ function Sidenav({ color }) {
               style={{
                 background: page === "portfoliorebalancing" ? color : "",
               }}
-            > 
+            >
               {/* Svg Below */}
-              {svg} 
+              {svg}
             </span>
             <span className="label">Rebalancing</span>
           </NavLink>
@@ -370,7 +370,7 @@ function Sidenav({ color }) {
             </span>
             <span className="label">RTL</span>
           </NavLink> */}
-          {/* <Menu.Item key="9">
+        {/* <Menu.Item key="9">
             <NavLink to="/payment">
               <span
                 className="icon"
@@ -384,7 +384,7 @@ function Sidenav({ color }) {
             </NavLink>
           </Menu.Item> */}
         {/* </Menu.Item> */}
-        <Menu.Item className="menu-item-header" key="5">
+        {/* <Menu.Item className="menu-item-header" key="5">
           Account Pages
         </Menu.Item>
         <Menu.Item key="10">
@@ -399,13 +399,13 @@ function Sidenav({ color }) {
             </span>
             <span className="label">Profile</span>
           </NavLink>
-        </Menu.Item>
-        <Menu.Item key="11">
+        </Menu.Item> */}
+        {/* <Menu.Item key="11">
           <NavLink to="/sign-in">
             <span className="icon">{signin}</span>
             <span className="label">Sign In</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
         {/* <Menu.Item key="12">
           <NavLink to="/sign-up">
             <span className="icon">{signup}</span>

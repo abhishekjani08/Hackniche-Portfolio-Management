@@ -24,7 +24,7 @@ const SignIn = () => {
 
         console.log(data);
 
-        alert("User Signin successfulssss");
+        alert("User Signin successful");
       }
 
 
