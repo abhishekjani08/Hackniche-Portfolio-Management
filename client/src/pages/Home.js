@@ -130,7 +130,7 @@ function Home() {
   ];
   const count = [
     {
-      today: "Today’s Sales",
+      today: "Today’s Stocks",
       title: "$53,000",
       persent: "+30%",
       icon: dollor,
