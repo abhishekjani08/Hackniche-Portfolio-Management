@@ -529,7 +529,7 @@ function Home() {
                   <Title level={5}>Work with the best</Title>
                   <p>
                     Wealth creation is an evolutionarily recent positive-sum
-                    game. It is all about who take the opportunity first.
+                    game. It is all about who take the opportunity second
                   </p>
                 </div>
                 <div className="card-footer">
