@@ -34,36 +34,36 @@ const MostSearched = () => {
 
   useEffect(() => {
     if (stockData.length > 0) {
-      createChart();
+      //createChart();
       setFilteredStockData(stockData);
     }
   }, [stockData]);
 
-  const createChart = () => {
-    const labels = filteredStockData.map((stock) => stock.symbol);
-    const prices = filteredStockData.map((stock) => stock.price);
+  // const createChart = () => {
+  //   const labels = filteredStockData.map((stock) => stock.symbol);
+  //   const prices = filteredStockData.map((stock) => stock.price);
   
-    const ctx = document.getElementById("stockChart").getContext("2d");
-    if (window.stockChartInstance) {
-      window.stockChartInstance.destroy(); // Destroy existing chart
-    }
+  //   const ctx = document.getElementById("stockChart").getContext("2d");
+  //   if (window.stockChartInstance) {
+  //     window.stockChartInstance.destroy(); // Destroy existing chart
+  //   }
     
-    // Create new chart instance
-    window.stockChartInstance = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Stock Prices",
-            data: prices,
-            borderColor: "rgb(75, 192, 192)",
-            tension: 0.1,
-          },
-        ],
-      },
-    });
-  };
+  //   // Create new chart instance
+  //   window.stockChartInstance = new Chart(ctx, {
+  //     type: "line",
+  //     data: {
+  //       labels: labels,
+  //       datasets: [
+  //         {
+  //           label: "Stock Prices",
+  //           data: prices,
+  //           borderColor: "rgb(75, 192, 192)",
+  //           tension: 0.1,
+  //         },
+  //       ],
+  //     },
+  //   });
+  // };
 
   const getColumnSearchProps = (dataIndex, columnTitle) => ({
     filterDropdown: ({
@@ -169,20 +169,6 @@ const MostSearched = () => {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  const handleLowToHighFilter = () => {
-    const sortedData = [...stockData].sort(
-      (a, b) => parseFloat(a.price) - parseFloat(b.price)
-    );
-    setFilteredStockData(sortedData);
-  };
-
-  const handleHighToLowFilter = () => {
-    const sortedData = [...stockData].sort(
-      (a, b) => parseFloat(b.price) - parseFloat(a.price)
-    );
-    setFilteredStockData(sortedData);
-  };
-
   return (
     <div> 
       {/* <h1>Stock List</h1> */}
@@ -193,7 +179,7 @@ const MostSearched = () => {
          loading={loading}
          onChange={onChange}
       />
-      <canvas id="stockChart" />
+      {/* <canvas id="stockChart" /> */}
     </div>
   );
 };
