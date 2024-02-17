@@ -53,21 +53,7 @@ const getAllAssets = async (req, res, next) => {
 
 // // Get Portfolio by ID
 const getAsset = async (req, res, next) => {
-  try {
-    const assetId = req.params.id;
-    const asset = await Asset.findById(assetId);
-
-    if (!asset) {
-      return res.status(404).json({ error: "Asset not found" });
-    } else {
-      res
-        .status(200)
-        .json({ message: "asset found successfully", data: asset });
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-    console.error(error);
-  }
+  s
 };
 const getAssetByPortfolioId = async (req, res, next) => {
   try {
