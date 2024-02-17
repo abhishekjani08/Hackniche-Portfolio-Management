@@ -18,11 +18,19 @@ const Login = () => {
 
       setEmail(data.data.email);
       setUserPassword(data.data.userPassword);
+      if (data.data.user === null) {
+        alert("Wrong Credential");
+        history.push("/login");
+      }
+      else {
+        console.log(data);
+        alert("User Signin successfulssss");
+        console.log(data);
 
-      console.log(data);
+        alert("User Logged in Successfulsss");
+        history.push("/dashboard");
+      }
 
-      alert("User Logged in Successful");
-      history.push("/dashboard");
     } catch (error) {
       console.log(error);
     }

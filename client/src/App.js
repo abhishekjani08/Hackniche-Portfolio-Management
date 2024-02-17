@@ -17,7 +17,7 @@ import "./assets/styles/responsive.css";
 import Product from "./pages/Product";
 import SalesReportPage from "./pages/Sales";
 import Category from "./pages/Category";
-import HistoricalData from "./pages/HistoricalData";
+import MostSearched from "./pages/MostSearched";
 import StockGraph from "./pages/StockGraph";
 import NewsFeed from "./pages/NewsFeed";
 import RiskParameters from "./pages/RiskParameters";
@@ -34,11 +34,15 @@ function App() {
         <Route path="/register" exact component={SignIn} />
         <Main>
           <Route exact path="/dashboard" component={Home} />
-          <Route exact path="/historicaldata" component={HistoricalData} />
+          <Route exact path="/mostsearched" component={MostSearched} />
           <Route exact path="/stockgraph" component={StockGraph} />
           <Route exact path="/newsfeed" component={NewsFeed} />
           <Route exact path="/riskparameters" component={RiskParameters} />
-          <Route exact path="/portfoliorebalancing" component={PortfolioRebalancing} />
+          <Route
+            exact
+            path="/portfoliorebalancing"
+            component={PortfolioRebalancing}
+          />
           <Route exact path="/tables" component={Tables} />
           <Route exact path="/billing" component={Billing} />
           <Route exact path="/rtl" component={Rtl} />

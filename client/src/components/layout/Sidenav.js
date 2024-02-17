@@ -193,17 +193,17 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item>
         <Menu.Item key="12">
-          <NavLink to="/historicaldata">
+          <NavLink to="/mostsearched">
             <span
               className="icon"
               style={{
-                background: page === "historicaldata" ? color : "",
+                background: page === "mostsearched" ? color : "",
               }}
             > 
               {/* Svg Below */}
               {svg} 
             </span>
-            <span className="label">Historical Data</span>
+            <span className="label">Most Searched Data</span>
           </NavLink>
         </Menu.Item>
 

@@ -14,14 +14,20 @@ const SignIn = () => {
       const userData = { userName, email, userPassword };
 
       const data = await axios.post("http://localhost:5000/api/user/signup", userData);
+      if (data.data.user === null) {
+        alert("Error while getting login");
+      }
+      else {
+        setUserName(data.data.userName);
+        setEmail(data.data.email);
+        setUserPassword(data.data.userPassword);
 
-      setUserName(data.data.userName);
-      setEmail(data.data.email);
-      setUserPassword(data.data.userPassword);
+        console.log(data);
 
-      console.log(data);
+        alert("User Signin successfulssss");
+      }
 
-      alert("User Signin successful");
+
     } catch (error) {
       console.log(error);
     }
