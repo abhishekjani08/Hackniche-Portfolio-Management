@@ -18,7 +18,7 @@ import Product from "./pages/Product";
 import SalesReportPage from "./pages/Sales";
 import Category from "./pages/Category";
 import MostSearched from "./pages/MostSearched";
-import StockGraph from "./pages/StockGraph";
+import StockGraph from "./pages/Historical";
 import NewsFeed from "./pages/NewsFeed";
 import RiskParameters from "./pages/RiskParameters";
 import PortfolioRebalancing from "./pages/PortfolioRebalancing";
@@ -35,7 +35,7 @@ function App() {
         <Main>
           <Route exact path="/dashboard" component={Home} />
           <Route exact path="/mostsearched" component={MostSearched} />
-          <Route exact path="/stockgraph" component={StockGraph} />
+          <Route exact path="/historical" component={StockGraph} />
           <Route exact path="/newsfeed" component={NewsFeed} />
           <Route exact path="/riskparameters" component={RiskParameters} />
           <Route
