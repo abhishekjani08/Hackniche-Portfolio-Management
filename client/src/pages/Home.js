@@ -41,9 +41,16 @@ function Home() {
   const [subjectList, setSubjectList] = useState(["hello", "hello2", "hello3"]);
   const [loadingSubjects, setLoadingSubjects] = useState(false);
 
+  const [selectedSubject, setSelectedSubject] = useState("");
+
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
   const [reverse, setReverse] = useState(false);
+  const handleInputChange = (e) => {
+    console.log("subject", e.target.value);
+    setSelectedSubject(e.target.value);
+  };
+  console.log("==-->", selectedSubject);
 
   const dollor = [
     <svg
@@ -399,7 +406,7 @@ function Home() {
                 name="subject"
                 // value={projectDetails.subject}
                 defaultValue={""}
-                // onChange={(e) => handleInputChange(e, 'subject')}
+                onChange={(e) => handleInputChange(e)}
                 className="font-bold text-gray-800 text-md focus:border-blue-500 w-full rounded border px-3 py-2 focus:outline-none"
               >
                 <option value="" disabled className="font-bold">
@@ -422,10 +429,9 @@ function Home() {
               </label>
               <select
                 name="subject"
-                // value={projectDetails.subject}
                 defaultValue={""}
-                // onChange={(e) => handleInputChange(e, 'subject')}
-                className=" font-bold text-gray-800 text-md focus:border-blue-500 w-full rounded border px-3 py-2 focus:outline-none"
+                // onChange={(e) => handleInputChange(e)}
+                className="font-bold text-gray-800 text-md focus:border-blue-500 w-full rounded border px-3 py-2 focus:outline-none"
               >
                 <option value="" disabled>
                   Select Subject
@@ -433,8 +439,12 @@ function Home() {
                 {loadingSubjects ? (
                   <option disabled>Loading subjects...</option>
                 ) : (
-                  subjectList?.map((subject, index) => (
-                    <option key={index} value={subject}>
+                  subjectList.map((subject, index) => (
+                    <option
+                      key={index}
+                      value={subject}
+                      // onChange={(e) => handleInputChange(e)}
+                    >
                       {subject}
                     </option>
                   ))
@@ -444,7 +454,7 @@ function Home() {
           </div>
         </div>
         <Card bordered={false} className="criclebox h-full">
-          <StockTable />
+          <StockTable selectedSubject={selectedSubject} />
           {/* <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
           <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
           <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
