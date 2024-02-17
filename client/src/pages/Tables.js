@@ -6,11 +6,9 @@ import { SearchOutlined } from "@ant-design/icons";
 import EditUser from "../components/EditUser";
 import axios from "axios";
 
-
-
-
 const Tables = () => {
   const [searchText, setSearchText] = useState("");
+  console.log(searchText);
   const [searchedColumn, setSearchedColumn] = useState("");
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -34,7 +32,7 @@ const Tables = () => {
 
   // update data code
 
-  const handleUpdate = () => {};
+  // const handleUpdate = () => {};
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -203,10 +201,10 @@ const Tables = () => {
     },
   ];
 
-  const handleViewMore = (record) => {
-    // Implement logic to handle "View More" button click
-    console.log("View More Clicked for:", record);
-  };
+  // Implement logic to handle "View More" button click
+  // const handleViewMore = (record) => {
+  //   console.log("View More Clicked for:", record);
+  // };
 
   // Generate serial numbers and modify the data
   const dataWithSrNo = data.map((item, index) => ({

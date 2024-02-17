@@ -8,8 +8,6 @@ import "jspdf-autotable";
 import SalesReportTable from "../components/SalesReportTable";
 
 
-
-
 const { RangePicker } = DatePicker;
 
 const SalesReportPage = () => {

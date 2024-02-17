@@ -32,11 +32,11 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/sales" component={SalesReportPage} />
           <Route exact path="/subcategories" component={Subcategories} />
-          <Route exact path="/category" component={Category} />
+          {/* <Route exact path="/category" component={Category} />
           <Route exact path="/product" component={Product} />
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/payment" component={PaymentChange} />
-          <Route exact path="/carts" component={Carts} />
+          <Route exact path="/carts" component={Carts} /> */}
           {/* <Redirect from="*" to="/dashboard" /> */}
         </Main>
       </Switch>
