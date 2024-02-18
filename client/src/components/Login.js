@@ -20,7 +20,7 @@ const Login = () => {
       setUserPassword(data.data.userPassword);
 
       console.log(data);
-
+      localStorage.setItem("userData", JSON.stringify(data.data.userName));
       alert("User Logged in Successful");
       history.push("/");
     } catch (error) {

@@ -164,7 +164,7 @@ function Home() {
     {
       today: "Current Stocks",
       title: "50",
-      persent: "+30%",
+        persent: "+30%",
       icon: dollor,
       bnb: "bnb2",
     },
@@ -385,7 +385,9 @@ function Home() {
                       </Title>
                     </Col>
                     <Col xs={6}>
-                      <div className="icon-box">{c.icon}</div>
+                      <div className="icon-box flex justify-center align-center"> <span className="mt-2">
+                          {c.icon}
+                        </span> </div>
                     </Col>
                   </Row>
                 </div>
@@ -403,7 +405,7 @@ function Home() {
           <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <p className="font-bold text-xl text-gray-600">
-                Search based on Stock Exchange{" "}
+                Sample Graph Stocks{" "}
               </p>
               <LineChart />
             </Card>
