@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Card,
@@ -35,6 +35,7 @@ import team3 from "../assets/images/team-3.jpg";
 import team4 from "../assets/images/team-4.jpg";
 import card from "../assets/images/info-card-1.jpg";
 import StockTable from "../components/StockTable";
+import axios from "axios";
 
 function Home() {
   const { Title, Text } = Typography;
@@ -42,6 +43,8 @@ function Home() {
   const [loadingSubjects, setLoadingSubjects] = useState(false);
 
   const [selectedSubject, setSelectedSubject] = useState("");
+  //const [mutualFunds, setmutualFunds] = useState();
+  const [mutualFunds, setMutualFunds] = useState([]);
 
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
@@ -51,6 +54,25 @@ function Home() {
     setSelectedSubject(e.target.value);
   };
   console.log("==-->", selectedSubject);
+
+
+  useEffect(() => {
+    const fetchMutualFundsData = async () => {
+      try {
+        const response = await axios.get('https://api.mfapi.in/mf');
+        console.log(response.data); // Log the data to the console
+        if (response.data && response.data.length > 0) {
+          setMutualFunds(response.data); // Set mutualFunds state to the fetched data
+        } else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error('Error fetching mutual funds data:', error);
+      }
+    };
+
+    fetchMutualFundsData();
+  }, []);
 
   const dollor = [
     <svg
@@ -161,8 +183,8 @@ function Home() {
       bnb: "redtext",
     },
     {
-      today: "New Stocks",
-      title: "200",
+      today: "Mutual Funds",
+      title: mutualFunds.length.toString(),
       persent: "10%",
       icon: cart,
       bnb: "bnb2",
