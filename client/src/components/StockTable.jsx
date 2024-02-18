@@ -1,16 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tag, Input, Space } from "antd";
+import { Table, Input, Space, Select, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
-// import BrandOne from "../images/brand/brand-01.svg"; // Import other brand images as needed
 import "./StockTable.css";
-// import EditApplicant  from "./EditApplicant";
+const { Option } = Select;
 
 const StockTable = ({ selectedSubject }) => {
-  console.log("--->", selectedSubject);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedExchange, setSelectedExchange] = useState("");
+  const [uniqueStockExchanges, setUniqueStockExchanges] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://financialmodelingprep.com/api/v3/etf/list?apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn"
+        );
+        setData(response.data);
+        setFilteredData(response.data); // Initialize filteredData with all data
+        // Extract all unique stock exchanges from the data
+        const uniqueExchanges = Array.from(
+          new Set(response.data.map((item) => item.exchange))
+        );
+        setUniqueStockExchanges(uniqueExchanges);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleExchangeSelect = (value) => {
+    setSelectedExchange(value);
+    if (value === "") {
+      // If "Select Stock Exchange" is selected, show all data
+      setFilteredData(data);
+    } else {
+      // Filter data based on selected stock exchange
+      const filtered = data.filter((item) => item.exchange === value);
+      setFilteredData(filtered);
+    }
+  };
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -22,16 +55,6 @@ const StockTable = ({ selectedSubject }) => {
     clearFilters();
     setSearchText("");
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/api/stock/getAll`);
-      // console.log(res.data);
-      console.log(res.data.data);
-      setData(res.data.data);
-    };
-    // fetchVideo();
-    fetchData();
-  }, []);
 
   const getColumnSearchProps = (dataIndex, columnTitle) => ({
     filterDropdown: ({
@@ -40,74 +63,33 @@ const StockTable = ({ selectedSubject }) => {
       confirm,
       clearFilters,
     }) => (
-      <div className="p-4">
+      <div style={{ padding: 8 }}>
         <Input
           placeholder={`Search ${columnTitle}`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
-          onChangeCapture={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          className="mb-2"
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Space>
-          <button
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
             onClick={() => handleReset(clearFilters)}
-            className="bg-gray-200 text-gray-800 mr-2 rounded px-4 py-2"
+            size="small"
+            style={{ width: 90 }}
           >
             Reset
-          </button>
-          <button
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            className="rounded bg-primary px-4 py-2 text-black"
-          >
-            OK
-          </button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    render: (text) =>
-      searchedColumn === dataIndex ? (
-        <strong>{text}</strong>
-      ) : (
-        <span>{text}</span>
-      ),
-  });
-  const getColumnSearchPropsName = (dataIndex, columnTitle) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div className="p-4">
-        <Input
-          placeholder={`Search ${columnTitle}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onChangeCapture={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          className="mb-2"
-        />
-        <Space>
-          <button
-            onClick={() => handleReset(clearFilters)}
-            className="bg-gray-200 text-gray-800 mr-2 rounded px-4 py-2"
-          >
-            Reset
-          </button>
-          <button
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            className="rounded bg-primary px-4 py-2 text-black"
-          >
-            OK
-          </button>
+          </Button>
         </Space>
       </div>
     ),
@@ -116,9 +98,11 @@ const StockTable = ({ selectedSubject }) => {
     ),
     onFilter: (value, record) =>
       record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()) && record[selectedSubject] === value, // Include selectedSubject prop in filter
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
     render: (text) =>
       searchedColumn === dataIndex ? (
         <strong>{text}</strong>
@@ -127,418 +111,60 @@ const StockTable = ({ selectedSubject }) => {
       ),
   });
 
-  // const data = [
-  //   {
-  //     key: "1",
-  //     name: "John Brown",
-  //     gender: "Male",
-  //     // age: 32,
-
-  //     role: "Web Developer",
-  //     round: "Round -2 Scheduled",
-  //     status: "Ongoing",
-  //     dob: "23/10/2001",
-  //     email: "John@gmail.com",
-  //     contact: 9579888546,
-  //     resume: "resume link",
-  //     about: "hello i am zaid",
-  //     remark1: "hello in round-1 it is get rejected due to the followig reason",
-  //     remark2: "remark02 rejected",
-  //   },
-  //   {
-  //     key: "2",
-  //     name: "Jim Green",
-  //     gender: "Male",
-  //     age: 42,
-  //     role: "App Developer",
-  //     email: "Jim@gmail.com",
-
-  //     round: "Round-1 Completed",
-
-  //     status: "New",
-  //   },
-  //   {
-  //     key: "3",
-  //     name: "Joe Black",
-  //     age: 32,
-  //     gender: "Male",
-  //     role: "Graphic Design",
-  //     round: "Round-1 Completed",
-  //     email: "Joe@gmail.com",
-  //     status: "Rejected",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     email: "Joe@gmail.com",
-
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Scheduled",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-1 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-2 Scheduled",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-2 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-2 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  //   {
-  //     key: "4",
-  //     name: "Jim Red",
-  //     age: 32,
-  //     gender: "Female",
-  //     role: "Web Developer",
-  //     round: "Round-2 Completed",
-
-  //     status: "Ongoing",
-  //   },
-  // ];
   const columns = [
-    {
-      title: "Sr no",
-      dataIndex: "sr",
-      defaultSortOrder: "descend",
-      className:
-        "bg-white bg-white p-2.5 text-black hover:bg-white text-sm font-medium uppercase",
-    },
     {
       title: "Name",
       dataIndex: "name",
       ...getColumnSearchProps("name", "name"),
-      className:
-        "bg-white bg-white p-2.5 text-black hover:bg-white text-sm font-medium uppercase",
     },
     {
       title: "Symbol",
       dataIndex: "symbol",
-      className:
-        "bg-white bg-white text-black  hover:bg-white text-center p-2.5",
     },
-    {
-      title: "Currency",
-      dataIndex: "currency",
-      ...getColumnSearchProps("role", "Role"),
-      className:
-        "bg-white text-black bg-white hover:bg-white p-2.5 text-center",
-    },
+  
     {
       title: "Stock Exchange",
-      dataIndex: "stockExchange",
-      ...getColumnSearchPropsName("stockExchange", "New York Stock Exchange"),
-      className:
-        "bg-white text-black bg-white hover:bg-white p-2.5 text-center",
+      dataIndex: "exchange",
+      ...getColumnSearchProps("exchange", "Stock Exchange"),
     },
     {
-      title: "Close",
-      dataIndex: "close",
-      // filters: [
-      //   { text: "New", value: "New" },
-      //   { text: "Ongoing", value: "Ongoing" },
-      //   { text: "Completed", value: "Completed" },
-      //   { text: "Rejected", value: "Rejected" },
-      // ],
-      // onFilter: (value, record) => record.Status.indexOf(value) === 0,
-      // render: (Status) => {
-      //   let color = "";
-      //   switch (Status) {
-      //     case "Ongoing":
-      //       color = "blue";
-      //       break;
-      //     case "New":
-      //       color = "yellow";
-      //       break;
-      //     case "Completed":
-      //       color = "green";
-      //       break;
-      //     case "Rejected":
-      //       color = "red";
-      //       break;
-      //     default:
-      //       color = "";
-      //   }
-      //   return (
-      //     <Tag color={color} key={Status}>
-      //       {Status}
-      //     </Tag>
-      //   );
-      // },
-      className: " bg-white p-2.5 text-center hover:bg-white",
+      title: "Stock Exchange Short Name",
+      dataIndex: "exchangeShortName",
+      ...getColumnSearchProps("exchangeShortName", "Stock Exchange Short Name"),
     },
     {
-      title: "High",
-      dataIndex: "high",
-      // filters: [
-      //   { text: "Round-1 Scheduled ", value: "Round-1 Scheduled" },
-      //   { text: "Round-2 Scheduled", value: "Round-2 Scheduled" },
-      //   { text: "Round-1 Completed", value: "Round-1 Completed" },
-      //   { text: "Round-2 Completed", value: "Round-2 Completed" },
-      // ],
-      // onFilter: (value, record) => record.Round.indexOf(value) === 0,
-      // render: (Round) => {
-      //   let color = "";
-      //   switch (Round) {
-      //     case "Round -1 Ongoing":
-      //       color = "cyan";
-      //       break;
-      //     case "Round -2 Ongoing":
-      //       color = "blue";
-      //       break;
-      //     case "Completed":
-      //       color = "green";
-      //       break;
-      //     case "Rejected":
-      //       color = "red";
-      //       break;
-      //     default:
-      //       color = "";
-      //   }
-      //   return (
-      //     <Tag color={color} key={Round}>
-      //       {Round}
-      //     </Tag>
-      //   );
-      // },
-      className: "font-bold bg-white bg-white text-center",
+      title: "Price",
+      dataIndex: "price",
     },
-    {
-      title: "Low",
-      dataIndex: "low",
-      // filters: [
-      //   { text: "Round-1 Scheduled ", value: "Round-1 Scheduled" },
-      //   { text: "Round-2 Scheduled", value: "Round-2 Scheduled" },
-      //   { text: "Round-1 Completed", value: "Round-1 Completed" },
-      //   { text: "Round-2 Completed", value: "Round-2 Completed" },
-      // ],
-      // onFilter: (value, record) => record.Round.indexOf(value) === 0,
-      // render: (Round) => {
-      //   let color = "";
-      //   switch (Round) {
-      //     case "Round -1 Ongoing":
-      //       color = "cyan";
-      //       break;
-      //     case "Round -2 Ongoing":
-      //       color = "blue";
-      //       break;
-      //     case "Completed":
-      //       color = "green";
-      //       break;
-      //     case "Rejected":
-      //       color = "red";
-      //       break;
-      //     default:
-      //       color = "";
-      //   }
-      //   return (
-      //     <Tag color={color} key={Round}>
-      //       {Round}
-      //     </Tag>
-      //   );
-      // },
-      className: "font-bold bg-white bg-white text-center",
-    },
-    {
-      title: "Volume",
-      dataIndex: "volume",
-      // filters: [
-      //   { text: "Round-1 Scheduled ", value: "Round-1 Scheduled" },
-      //   { text: "Round-2 Scheduled", value: "Round-2 Scheduled" },
-      //   { text: "Round-1 Completed", value: "Round-1 Completed" },
-      //   { text: "Round-2 Completed", value: "Round-2 Completed" },
-      // ],
-      // onFilter: (value, record) => record.Round.indexOf(value) === 0,
-      // render: (Round) => {
-      //   let color = "";
-      //   switch (Round) {
-      //     case "Round -1 Ongoing":
-      //       color = "cyan";
-      //       break;
-      //     case "Round -2 Ongoing":
-      //       color = "blue";
-      //       break;
-      //     case "Completed":
-      //       color = "green";
-      //       break;
-      //     case "Rejected":
-      //       color = "red";
-      //       break;
-      //     default:
-      //       color = "";
-      //   }
-      //   return (
-      //     <Tag color={color} key={Round}>
-      //       {Round}
-      //     </Tag>
-      //   );
-      // },
-      className: "font-bold bg-white bg-white text-center",
-    },
-    {
-      title: "Open",
-      dataIndex: "open",
-      sorter: (a, b) => parseFloat(a.open) - parseFloat(b.open),
-      sortDirections: ["ascend", "descend"],
-      // filters: [
-      //   { text: "Round-1 Scheduled ", value: "Round-1 Scheduled" },
-      //   { text: "Round-2 Scheduled", value: "Round-2 Scheduled" },
-      //   { text: "Round-1 Completed", value: "Round-1 Completed" },
-      //   { text: "Round-2 Completed", value: "Round-2 Completed" },
-      // ],
-      // onFilter: (value, record) => record.Round.indexOf(value) === 0,
-      // render: (Round) => {
-      //   let color = "";
-      //   switch (Round) {
-      //     case "Round -1 Ongoing":
-      //       color = "cyan";
-      //       break;
-      //     case "Round -2 Ongoing":
-      //       color = "blue";
-      //       break;
-      //     case "Completed":
-      //       color = "green";
-      //       break;
-      //     case "Rejected":
-      //       color = "red";
-      //       break;
-      //     default:
-      //       color = "";
-      //   }
-      //   return (
-      //     <Tag color={color} key={Round}>
-      //       {Round}
-      //     </Tag>
-      //   );
-      // },
-      className: "font-bold bg-white bg-white text-center hover:bg-white",
-    },
-    // {
-    //   title: "Applied Date",
-    //   dataIndex: "Date",
-    //   render: (_, record) => <h1>21 / Nov / 2023</h1>,
-    //   className: "bg-white text-black bg-white p-2.5 text-center",
-    // },
-    // {
-    //   title: "Details",
-    //   dataIndex: "viewMore",
-    //   //   render: (_, record) => <EditApplicant data={record} />,
-    //   className: "bg-white text-black bg-white p-2.5 text-center",
-    // },
   ];
 
-  const handleViewMore = (record) => {
-    // Implement logic to handle "View More" button click
-    console.log("View More Clicked for:", record);
-  };
-
-  // Generate serial numbers and modify the data
-  const dataWithSrNo = data.map((item, index) => ({
-    ...item,
-    key: (index + 1).toString(), // Assigning unique key for Ant Design Table
-    sr: index + 1, // Adding the serial number
-  }));
-
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-
   return (
-    // <div className="rounded-sm border border-stroke  px-5 pt-6 pb-2.5 text-black  shadow-default    bg-white dark:text-black sm:px-7.5 xl:pb-1">
     <div>
+      <div style={{ marginBottom: 16 }}>
+      <Select
+  showSearch
+  style={{ width: 200 }}
+  placeholder="Select Stock Exchange"
+  optionFilterProp="children"
+  onChange={handleExchangeSelect}
+  filterOption={(input, option) =>
+    option && option.children && option.children.toLowerCase()
+      ? option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      : false
+  }
+>
+  {uniqueStockExchanges.map((exchange, index) => (
+    <Option key={index} value={exchange}>
+      {exchange}
+    </Option>
+  ))}
+</Select>
+
+      </div>
       <Table
-        className="dark:bg-white text-black dark:text-black"
         columns={columns}
-        // dataSource={data}
-        dataSource={dataWithSrNo} // Use modified data here
-        onChange={onChange}
-        // style={}
-        // rowClassName={() => 'bg-white hover:bg-bodydark2'}
-        // bordered
+        dataSource={filteredData}
+        pagination={{ pageSize: 10 }}
         scroll={{ x: true }}
       />
     </div>
