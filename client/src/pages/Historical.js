@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { DatePicker, Button } from "antd";
+import { DatePicker, Button, Select } from "antd";
 import axios from "axios";
 import Chart from "chart.js/auto";
 import ZoomPlugin from "chartjs-plugin-zoom";
 
 const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 const Historical = () => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [stockData, setStockData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedSource, setSelectedSource] = useState("AAL"); // Default source
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const Historical = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://financialmodelingprep.com/api/v3/historical-chart/5min/AAPL?from=${fromDate}&to=${toDate}&apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn`
+        `https://financialmodelingprep.com/api/v3/historical-chart/5min/${selectedSource}?from=${fromDate}&to=${toDate}&apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn`
       );
       setStockData(response.data);
       setLoading(false);
@@ -77,20 +79,30 @@ const Historical = () => {
     }
   };
 
+  const handleSourceChange = (value) => {
+    setSelectedSource(value);
+  };
+
   return (
     <div>
       <div>
         <div>Price Graphs</div>
-      <RangePicker onChange={handleDateChange} />
-      <Button type="primary" onClick={fetchData} loading={loading} style={{ color: "black" }}>
-        Fetch Data
-      </Button>
-      <canvas id="stockChart" />
+        <RangePicker onChange={handleDateChange} />
+        <Select defaultValue="AAL" style={{ width: 120 }} onChange={handleSourceChange}>
+        <Option value="AAL">AAL</Option>
+        <Option value="AAPL">AAPL</Option>
+        <Option value="GOOGL">GOOGL</Option>
+        <Option value="MSFT">MSFT</Option>
+        </Select>
+        <Button type="primary" onClick={fetchData} loading={loading} style={{ color: "black" }}>
+          Fetch Data
+        </Button>
+        <canvas id="stockChart" />
       </div>
 
       <div>
-        <div>Pie Charts</div>
-     {/* add pie charts here for   */}
+        {/* <div>Pie Charts</div> */}
+        {/* add pie charts here for   */}
       </div>
     </div>
   );
