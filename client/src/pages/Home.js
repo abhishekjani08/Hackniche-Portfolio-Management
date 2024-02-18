@@ -383,7 +383,7 @@ function Home() {
               <p className="font-bold text-xl text-gray-600">
                 Recommended Stock{" "}
               </p>
-              {/* <LineChart /> */}
+              <LineChart />
             </Card>
           </Col>
         </Row>
@@ -396,62 +396,7 @@ function Home() {
         </div>
         <div>
           {" "}
-          <div className="grid grid-cols-2 gap-2 ">
-            {" "}
-            <div className="mb-4">
-              <label className="block font-medium text-black dark:text-white">
-                Subject
-              </label>
-              <select
-                name="subject"
-                // value={projectDetails.subject}
-                defaultValue={""}
-                onChange={(e) => handleInputChange(e)}
-                className="font-bold text-gray-800 text-md focus:border-blue-500 w-full rounded border px-3 py-2 focus:outline-none"
-              >
-                <option value="" disabled className="font-bold">
-                  Select Stock Exchange
-                </option>
-                {loadingSubjects ? (
-                  <option disabled>Loading subjects...</option>
-                ) : (
-                  subjectList?.map((subject, index) => (
-                    <option key={index} value={subject}>
-                      {subject}
-                    </option>
-                  ))
-                )}
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block font-medium text-black dark:text-white">
-                Subject
-              </label>
-              <select
-                name="subject"
-                defaultValue={""}
-                // onChange={(e) => handleInputChange(e)}
-                className="font-bold text-gray-800 text-md focus:border-blue-500 w-full rounded border px-3 py-2 focus:outline-none"
-              >
-                <option value="" disabled>
-                  Select Subject
-                </option>
-                {loadingSubjects ? (
-                  <option disabled>Loading subjects...</option>
-                ) : (
-                  subjectList.map((subject, index) => (
-                    <option
-                      key={index}
-                      value={subject}
-                      // onChange={(e) => handleInputChange(e)}
-                    >
-                      {subject}
-                    </option>
-                  ))
-                )}
-              </select>
-            </div>
-          </div>
+     
         </div>
         <Card bordered={false} className="criclebox h-full">
           <StockTable selectedSubject={selectedSubject} />
@@ -466,8 +411,8 @@ function Home() {
           <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
           <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
           <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
-          <p className="font-bold text-xl text-gray-600">Recommended Stock </p> */}
-          {/* <LineChart /> */}
+          <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
+          <LineChart /> */}
         </Card>
         {/* <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
@@ -569,9 +514,9 @@ function Home() {
               </div>
             </Card>
           </Col>
-        </Row> */}
+        </Row>
 
-        {/* <Row gutter={[24, 0]}>
+        <Row gutter={[24, 0]}>
           <Col xs={24} md={12} sm={24} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <Row gutter>
