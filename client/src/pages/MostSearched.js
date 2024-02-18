@@ -19,7 +19,7 @@ const MostSearched = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://financialmodelingprep.com/api/v3/stock/list?apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn"
+          "https://financialmodelingprep.com/api/v3/stock/list?apikey=be6640d1c6afc29835b05c3314787a8e"
         );
         console.log(response);
         setStockData(response.data);

@@ -25,7 +25,8 @@ const Login = () => {
       }
       else {
         console.log(data);
-
+        // Store user data in local storage
+        localStorage.setItem("userData", JSON.stringify(data.data.userName));
         alert("User Logged in Successful");
         history.push("/dashboard");
       }
@@ -78,7 +79,7 @@ const Login = () => {
           <div className="text-grey-dark mt-6">
             Create an Account?
             <a className="no-underline border-b border-blue text-blue" href="/register">
-              &nbsp;Login
+              &nbsp;Register
             </a>.
           </div>
         </div>

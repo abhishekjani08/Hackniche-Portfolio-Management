@@ -25,6 +25,8 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import avtar from "../../assets/images/team-2.jpg";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const ButtonContainer = styled.div`
   .ant-btn-primary {
@@ -46,6 +48,8 @@ const ButtonContainer = styled.div`
     background-color: #1890ff;
   }
 `;
+
+
 
 const bell = [
   <svg
@@ -247,7 +251,7 @@ function Header({
   handleFixedNavbar,
 }) {
   const { Title, Text } = Typography;
-
+  const history = useHistory();
   const [visible, setVisible] = useState(false);
   const [sidenavType, setSidenavType] = useState("transparent");
 
@@ -255,6 +259,13 @@ function Header({
 
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
+
+  const handleLogout = () => {
+    // Remove user data from local storage
+    localStorage.removeItem("userData");
+    // Redirect to login page
+    history.push("/login");
+  }
 
   return (
     <>
@@ -410,8 +421,8 @@ function Header({
             </div>
           </Drawer>
           <Link to="/login" className="btn-sign-in mx-auto items-center ">
-            {profile}
-            <p className="mx-auto text-center ml-auto">Logout</p>
+            {/* {profile} */}
+            <p className="mx-auto text-center ml-auto px-4 py-2 bg-gray-600 hover:bg-red-600 hover:cursor-pointer text-white font-semibold rounded-lg" onClick={handleLogout}>Logout</p>
             {/* <span>Sign in</span> */}
           </Link>
           {/* <Input

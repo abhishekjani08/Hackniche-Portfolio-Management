@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
@@ -6,6 +6,17 @@ import logo from "../../assets/images/logo.png";
 function Sidenav({ color }) {
   const { pathname } = useLocation();
   const page = pathname.replace("/", "");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    // Get userName from local storage
+    const storedUserName = localStorage.getItem("userData");
+    if (storedUserName) {
+      // Trim double quotes from the string
+      const trimmedUserName = storedUserName.replace(/^"(.*)"$/, '$1');
+      setUserName(trimmedUserName);
+    }
+  }, []);
 
   const dashboard = [
     <svg
@@ -173,9 +184,9 @@ function Sidenav({ color }) {
 
   return (
     <>
-      <div className="brand">
-        <img src={logo} alt="" />
-        <span>Dashboard</span>
+      <div className="font-bold">
+        {/* <img src={logo} alt="" /> */}
+        <h1 className="text-xl">Hello {userName}</h1>
       </div>
       <hr />
       <Menu theme="light" mode="inline">

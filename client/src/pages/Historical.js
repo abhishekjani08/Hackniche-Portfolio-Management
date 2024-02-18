@@ -23,7 +23,7 @@ const Historical = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://financialmodelingprep.com/api/v3/historical-chart/5min/${selectedSource}?from=${fromDate}&to=${toDate}&apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn`
+        `https://financialmodelingprep.com/api/v3/historical-chart/5min/${selectedSource}?from=${fromDate}&to=${toDate}&apikey=be6640d1c6afc29835b05c3314787a8e`
       );
       setStockData(response.data);
       setLoading(false);
