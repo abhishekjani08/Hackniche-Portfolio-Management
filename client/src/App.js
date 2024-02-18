@@ -24,6 +24,7 @@ import RiskParameters from "./pages/RiskParameters";
 import PortfolioRebalancing from "./pages/PortfolioRebalancing";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import BarGraph from "./components/BarGraph";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path="/register" exact component={SignIn} />
         <Main>
           <Route exact path="/dashboard" component={Home} />
-          <Route exact path="/mostsearched" component={MostSearched} />
+          <Route exact path="/mostsearched" component={BarGraph} />
           <Route exact path="/historical" component={StockGraph} />
           <Route exact path="/newsfeed" component={NewsFeed} />
           <Route exact path="/riskparameters" component={RiskParameters} />
