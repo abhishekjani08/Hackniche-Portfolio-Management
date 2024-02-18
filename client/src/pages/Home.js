@@ -381,7 +381,7 @@ function Home() {
           <Col xs={24} sm={24} md={12} lg={12} xl={14} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <p className="font-bold text-xl text-gray-600">
-                Recommended Stock{" "}
+                Search based on Stock Exchange{" "}
               </p>
               <LineChart />
             </Card>
@@ -389,9 +389,9 @@ function Home() {
         </Row>
         <div
           bordered={false}
-          className="criclebox h-full bg-white p-4 rounded w-[20rem] text-center mx-auto my-4 rounded-xl "
+          className="circlebox h-full bg-white p-4 w-[30rem] text-center mx-auto my-4 rounded-xl "
         >
-          <p className="font-bold text-xl text-gray-600">Recommended Stock </p>
+          <p className="font-bold text-xl text-gray-600 ">Search based on Stock Exchange </p>
           {/* <LineChart /> */}
         </div>
         <div>

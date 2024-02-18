@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Input, Space, Button, Select } from "antd";
+import { Table, Input, Space, Select, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import "./StockTable.css";
@@ -11,15 +11,21 @@ const StockTable = ({ selectedSubject }) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedExchange, setSelectedExchange] = useState("");
+  const [uniqueStockExchanges, setUniqueStockExchanges] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://financialmodelingprep.com/api/v3/search?query=AA&apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn"
+          "https://financialmodelingprep.com/api/v3/etf/list?apikey=1ZH5AbyTIOQ4OhEKOqWZjea44O2NJgLn"
         );
         setData(response.data);
         setFilteredData(response.data); // Initialize filteredData with all data
+        // Extract all unique stock exchanges from the data
+        const uniqueExchanges = Array.from(
+          new Set(response.data.map((item) => item.exchange))
+        );
+        setUniqueStockExchanges(uniqueExchanges);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,13 +40,9 @@ const StockTable = ({ selectedSubject }) => {
       setFilteredData(data);
     } else {
       // Filter data based on selected stock exchange
-      const filtered = data.filter((item) => item.stockExchange === value);
+      const filtered = data.filter((item) => item.exchange === value);
       setFilteredData(filtered);
     }
-  };
-
-  const handleFilter = () => {
-    // This function can be used if needed
   };
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -61,29 +63,33 @@ const StockTable = ({ selectedSubject }) => {
       confirm,
       clearFilters,
     }) => (
-      <div className="p-4">
+      <div style={{ padding: 8 }}>
         <Input
           placeholder={`Search ${columnTitle}`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
-          onChangeCapture={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          className="mb-2"
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Space>
-          <button
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
             onClick={() => handleReset(clearFilters)}
-            className="bg-gray-200 text-gray-800 mr-2 rounded px-4 py-2"
+            size="small"
+            style={{ width: 90 }}
           >
             Reset
-          </button>
-          <button
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            className="rounded bg-primary px-4 py-2 text-black"
-          >
-            OK
-          </button>
+          </Button>
         </Space>
       </div>
     ),
@@ -91,7 +97,12 @@ const StockTable = ({ selectedSubject }) => {
       <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
     render: (text) =>
       searchedColumn === dataIndex ? (
         <strong>{text}</strong>
@@ -102,105 +113,58 @@ const StockTable = ({ selectedSubject }) => {
 
   const columns = [
     {
-      title: "Sr no",
-      dataIndex: "sr",
-      defaultSortOrder: "descend",
-      className:
-        "bg-white bg-white p-2.5 text-black hover:bg-white text-sm font-medium uppercase",
-    },
-    {
       title: "Name",
       dataIndex: "name",
       ...getColumnSearchProps("name", "name"),
-      className:
-        "bg-white bg-white p-2.5 text-black hover:bg-white text-sm font-medium uppercase",
     },
     {
       title: "Symbol",
       dataIndex: "symbol",
-      className:
-        "bg-white bg-white text-black  hover:bg-white text-center p-2.5",
     },
-    {
-      title: "Currency",
-      dataIndex: "currency",
-      ...getColumnSearchProps("role", "Role"),
-      className:
-        "bg-white text-black bg-white hover:bg-white p-2.5 text-center",
-    },
+  
     {
       title: "Stock Exchange",
-      dataIndex: "stockExchange",
-      ...getColumnSearchProps("stockExchange", "New York Stock Exchange"),
-      className:
-        "bg-white text-black bg-white hover:bg-white p-2.5 text-center",
+      dataIndex: "exchange",
+      ...getColumnSearchProps("exchange", "Stock Exchange"),
     },
     {
-      title: "Close",
-      dataIndex: "close",
-      className: " bg-white p-2.5 text-center hover:bg-white",
+      title: "Stock Exchange Short Name",
+      dataIndex: "exchangeShortName",
+      ...getColumnSearchProps("exchangeShortName", "Stock Exchange Short Name"),
     },
     {
-      title: "High",
-      dataIndex: "high",
-      className: "font-bold bg-white bg-white text-center",
-    },
-    {
-      title: "Low",
-      dataIndex: "low",
-      className: "font-bold bg-white bg-white text-center",
-    },
-    {
-      title: "Volume",
-      dataIndex: "volume",
-      className: "font-bold bg-white bg-white text-center",
-    },
-    {
-      title: "Open",
-      dataIndex: "open",
-      sorter: (a, b) => parseFloat(a.open) - parseFloat(b.open),
-      sortDirections: ["ascend", "descend"],
-      className: "font-bold bg-white bg-white text-center hover:bg-white",
+      title: "Price",
+      dataIndex: "price",
     },
   ];
 
-  // Generate serial numbers and modify the data
-  const dataWithSrNo = filteredData.map((item, index) => ({
-    ...item,
-    key: (index + 1).toString(), // Assigning unique key for Ant Design Table
-    sr: index + 1, // Adding the serial number
-  }));
-
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-
   return (
     <div>
-      <div className="grid grid-cols-2 gap-2 ">
-        <div className="mb-4">
-          <label className="block font-medium text-black">Subject</label>
-          <Select
-            defaultValue=""
-            style={{ width: 200, marginRight: 8 }}
-            onChange={handleExchangeSelect}
-          >
-            <Option value="">Select Stock Exchange</Option>
-            {data.map((item) => (
-              <Option key={item.symbol} value={item.stockExchange}>
-                {item.stockExchange}
-              </Option>
-            ))}
-          </Select>
-        </div>
-        {/* <Button onClick={handleFilter}>OK</Button> */}
-      </div>
+      <div style={{ marginBottom: 16 }}>
+      <Select
+  showSearch
+  style={{ width: 200 }}
+  placeholder="Select Stock Exchange"
+  optionFilterProp="children"
+  onChange={handleExchangeSelect}
+  filterOption={(input, option) =>
+    option && option.children && option.children.toLowerCase()
+      ? option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      : false
+  }
+>
+  {uniqueStockExchanges.map((exchange, index) => (
+    <Option key={index} value={exchange}>
+      {exchange}
+    </Option>
+  ))}
+</Select>
 
+      </div>
       <Table
-        className="dark:bg-white text-black dark:text-black"
         columns={columns}
-        dataSource={dataWithSrNo} // Use modified data here
-        onChange={onChange}
+        dataSource={filteredData}
+        pagination={{ pageSize: 10 }}
         scroll={{ x: true }}
       />
     </div>
